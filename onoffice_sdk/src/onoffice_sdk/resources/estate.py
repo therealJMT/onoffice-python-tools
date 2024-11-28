@@ -55,75 +55,112 @@ class EstateResource:
         
         return self.client._make_request(
             resource_type="estate",
-            action_id="urn:onoffice-de-ns:smart:2.5:smartml:action:read",
+            action_id=self.client.ACTION_READ,
             parameters=parameters
         )
-    
-    def get(self, estate_id: int, fields: Optional[List[str]] = None) -> Dict[str, Any]:
-        """
-        Get a single estate by ID.
-        
-        Args:
-            estate_id (int): Estate ID
-            fields (list, optional): Fields to return
-            
-        Returns:
-            dict: Estate details
-        """
-        fields = fields or ["Id", "kaufpreis", "lage"]
-        parameters = {
-            "data": fields,
-            "filter": {
-                "Id": [{"op": "=", "val": estate_id}]
-            }
-        }
-        
-        return self.client._make_request(
-            resource_type="estate",
-            action_id="urn:onoffice-de-ns:smart:2.5:smartml:action:read",
-            parameters=parameters
-        )
-    
+
     def create(self, data: Dict[str, Any]) -> Dict[str, Any]:
         """
         Create a new estate.
         
         Args:
-            data (dict): Estate data
+            data (dict): Estate data to create
             
         Returns:
-            dict: Created estate details
+            dict: Creation result
+            
+        Examples:
+            >>> client.estate.create({
+            ...     "objektart": "haus",
+            ...     "kaufpreis": 250000,
+            ...     "lage": "Berlin"
+            ... })
         """
-        parameters = {
-            "data": data
-        }
-        
         return self.client._make_request(
             resource_type="estate",
-            action_id="urn:onoffice-de-ns:smart:2.5:smartml:action:create",
-            parameters=parameters
+            action_id=self.client.ACTION_CREATE,
+            parameters={"data": data}
         )
-    
+
     def update(self, estate_id: int, data: Dict[str, Any]) -> Dict[str, Any]:
         """
         Update an existing estate.
         
         Args:
-            estate_id (int): Estate ID
+            estate_id (int): ID of the estate to update
             data (dict): Updated estate data
             
         Returns:
-            dict: Updated estate details
+            dict: Update result
+            
+        Examples:
+            >>> client.estate.update(123, {
+            ...     "kaufpreis": 260000
+            ... })
         """
-        parameters = {
-            "data": {
-                "Id": estate_id,
-                **data
-            }
-        }
-        
         return self.client._make_request(
             resource_type="estate",
-            action_id="urn:onoffice-de-ns:smart:2.5:smartml:action:modify",
-            parameters=parameters
+            action_id=self.client.ACTION_MODIFY,
+            parameters={
+                "data": {
+                    "elements": [{
+                        "id": estate_id,
+                        **data
+                    }]
+                }
+            }
+        )
+
+    def delete(self, estate_id: int) -> Dict[str, Any]:
+        """
+        Delete an estate.
+        
+        Args:
+            estate_id (int): ID of the estate to delete
+            
+        Returns:
+            dict: Deletion result
+            
+        Examples:
+            >>> client.estate.delete(123)
+        """
+        return self.client._make_request(
+            resource_type="estate",
+            action_id=self.client.ACTION_DELETE,
+            parameters={
+                "data": {
+                    "elements": [{
+                        "id": estate_id
+                    }]
+                }
+            }
+        )
+
+    def get(self, estate_id: int, fields: Optional[List[str]] = None) -> Dict[str, Any]:
+        """
+        Get a single estate by ID.
+        
+        Args:
+            estate_id (int): ID of the estate to retrieve
+            fields (list, optional): Fields to return
+            
+        Returns:
+            dict: Estate data
+            
+        Examples:
+            >>> client.estate.get(123, fields=["kaufpreis", "lage"])
+        """
+        fields = fields or ["Id", "kaufpreis", "lage"]
+        return self.client._make_request(
+            resource_type="estate",
+            action_id=self.client.ACTION_READ,
+            parameters={
+                "data": fields,
+                "filter": {
+                    "Id": [{
+                        "op": "=",
+                        "val": estate_id
+                    }]
+                }
+            }
         )

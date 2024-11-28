@@ -28,6 +28,13 @@ setup(
         'requests>=2.31.0',
         'python-dotenv>=1.0.0',
     ],
+    extras_require={
+        'dev': [
+            'pytest>=7.0.0',
+            'requests-mock>=1.11.0',
+            'pytest-cov>=4.1.0',
+        ]
+    },
     python_requires='>=3.6',
     classifiers=[
         'Development Status :: 4 - Beta',

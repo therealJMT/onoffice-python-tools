@@ -29,6 +29,14 @@ class OnOfficeClient:
     
     API_BASE_URL = 'https://api.onoffice.de/api/{version}/api.php'
     
+    # API Action IDs
+    ACTION_READ = 'urn:onoffice-de-ns:smart:2.5:smartml:action:read'
+    ACTION_CREATE = 'urn:onoffice-de-ns:smart:2.5:smartml:action:create'
+    ACTION_MODIFY = 'urn:onoffice-de-ns:smart:2.5:smartml:action:modify'
+    ACTION_DELETE = 'urn:onoffice-de-ns:smart:2.5:smartml:action:delete'
+    ACTION_GET = 'urn:onoffice-de-ns:smart:2.5:smartml:action:get'
+    ACTION_DO = 'urn:onoffice-de-ns:smart:2.5:smartml:action:do'
+
     def __init__(
         self,
         token: str,

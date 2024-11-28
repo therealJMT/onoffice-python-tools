@@ -15,7 +15,15 @@ A modern, Pythonic SDK for interacting with the OnOffice API. This SDK provides 
 ## Installation
 
 ```bash
-pip install onoffice-sdk
+# Clone the repository
+git clone https://github.com/therealJMT/onoffice-python-tools.git
+cd onoffice-python-tools/onoffice_sdk
+
+# Install the package locally
+pip install .
+
+# Or install in development mode if you plan to modify the code
+pip install -e .
 ```
 
 ## Quick Start

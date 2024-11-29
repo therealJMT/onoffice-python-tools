@@ -31,13 +31,29 @@ ENV/
 *.swp
 *.swo
 
+# Testing
+.coverage
+htmlcov/
+.pytest_cache/
+.tox/
+
 # Environment variables
 .env
-.env.*
+.env.local
+.env.*.local
 
 # Logs
 *.log
+logs/
+
+# Local development
+local_settings.py
+local_config.py
+test_config.py
 
 # OS
 .DS_Store
 Thumbs.db
+
+# Documentation
+docs/_build/

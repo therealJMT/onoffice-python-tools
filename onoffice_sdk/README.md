@@ -33,8 +33,8 @@ from onoffice_sdk import OnOfficeClient
 
 # Initialize the client
 client = OnOfficeClient(
-    token="your_token",
-    secret="your_secret"
+    token=os.getenv("ONOFFICE_API_TOKEN"),  # Use environment variables
+    secret=os.getenv("ONOFFICE_API_SECRET")  # Never hardcode credentials
 )
 
 # Search for estates
@@ -80,6 +80,27 @@ client = OnOfficeClient(
     secret=os.getenv('ONOFFICE_API_SECRET')
 )
 ```
+
+## Security Best Practices
+
+⚠️ **Important Security Notes:**
+
+1. **Environment Variables**: Always use environment variables for your API credentials. Never hardcode them in your code.
+   ```bash
+   # .env file (Add to .gitignore!)
+   ONOFFICE_API_TOKEN=your_actual_token
+   ONOFFICE_API_SECRET=your_actual_secret
+   ```
+
+2. **Version Control**: 
+   - Never commit `.env` files to version control
+   - Never commit actual API credentials
+   - Always use placeholder values in examples
+
+3. **Production Usage**:
+   - Use secure secret management in production
+   - Rotate credentials regularly
+   - Use the minimum required permissions
 
 ## Error Handling
 
